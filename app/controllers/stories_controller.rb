@@ -5,8 +5,7 @@ require_relative "../repositories/user_repository"
 class Stringer < Sinatra::Base
   get "/news" do
     @unread_stories = StoryRepository.unread
-    @user = UserRepository.fetch(session[:user_id])
-    @has_superfeedr = UserRepository.has_superfeedr()
+    
     erb :index
   end
 

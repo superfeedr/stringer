@@ -20,7 +20,7 @@ gem "coveralls", require: false
 gem "highline", require: false
 gem "thread"
 
-gem "rack-superfeedr"
+gem "rack-superfeedr", github: "superfeedr/rack-superfeedr"
 gem "json"
 
 group :production do

@@ -1,6 +1,7 @@
 require_relative "../repositories/feed_repository"
 require_relative "../commands/feeds/add_new_feed"
 require_relative "../commands/feeds/export_to_opml"
+require_relative "../helpers/pubsubhubbub_helpers"
 
 class Stringer < Sinatra::Base
   get "/feeds" do
@@ -11,11 +12,16 @@ class Stringer < Sinatra::Base
 
   delete "/feeds/:feed_id" do
     
-    # unsubscribe to superfeedr
+    # unsubscribe to pubsubhubbub
     begin
-      unless settings.superfeedr.nil?
+      unless settings.pubsubhubbub.nil?
         feed = FeedRepository.fetch(params[:feed_id])
-        settings.superfeedr.unsubscribe(feed.url)
+        hub = PubSubHubbubHelper.get_hub(feed.url)
+        if hub
+          subscription = settings.pubsubhubbub.unsubscribe(feed.url, nil, {:hub => hub})
+        else
+          subscription = settings.pubsubhubbub.unsubscribe(feed.url)
+        end
       end
     rescue Exception => msg  
       puts msg
@@ -37,18 +43,30 @@ class Stringer < Sinatra::Base
 
     if feed and feed.valid?
 
-      # subscribe to superfeedr
+      hub = PubSubHubbubHelper.get_hub(feed.url)
+      
+      # subscribe to pubsubhubbub
       begin
-        unless settings.superfeedr.nil?
-          subscription = settings.superfeedr.subscribe(feed.url)
+        unless settings.pubsubhubbub.nil?
+          puts "HUB--HUB--HUB"
+          puts "HUB--HUB--HUB"
+          puts "HUB--HUB--HUB"
+          if hub
+            puts "subscribe with hub"
+            subscription = settings.pubsubhubbub.subscribe(feed.url, nil, {:hub => hub})
+          else
+            puts "subscribe with NO hub"
+            subscription = settings.pubsubhubbub.subscribe(feed.url)
+          end
           if !subscription
-            flash.now[:error] = t('feeds.add.flash.superfeedr_subscribe_error')
+            flash.now[:error] = t('feeds.add.flash.pubsubhubbub_subscribe_error')
             erb :'feeds/add'
           end
         end 
       rescue Exception => msg  
-        #puts msg
-        flash.now[:error] = t('feeds.add.flash.superfeedr_subscribe_error')
+        puts "ERROR"
+        puts msg
+        flash.now[:error] = t('feeds.add.flash.pubsubhubbub_subscribe_error')
         erb :'feeds/add'
       end 
       #

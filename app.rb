@@ -20,7 +20,8 @@ class Stringer < Sinatra::Base
     set :public_dir, "app/public"
     set :root, File.dirname(__FILE__)
 
-    set :superfeedr, nil
+    set :host, nil
+    set :pubsubhubbub, nil
     set :stories, []
 
     enable :sessions
@@ -89,6 +90,12 @@ class Stringer < Sinatra::Base
     if !is_authenticated? && needs_authentication?(request.path)
       redirect '/login'
     end
+
+    if settings.host.nil?
+      settings.host = request.host
+      require_relative "app/tasks/initialize_pubsubhubbub"
+    end
+
   end
 
   get "/" do
@@ -119,6 +126,5 @@ require_relative "app/controllers/stories_controller"
 require_relative "app/controllers/first_run_controller"
 require_relative "app/controllers/sessions_controller"
 require_relative "app/controllers/feeds_controller"
-require_relative "app/controllers/superfeedr_controller"
 
-require_relative "app/tasks/initialize_superfeedr"
+#require_relative "app/tasks/initialize_pubsubhubbub"

@@ -1,12 +1,12 @@
 require "spec_helper"
 
-app_require "commands/users/superfeedr_user"
+app_require "commands/users/pubsubhubbub_user"
 
-describe SuperfeedrUser do
+describe PubsubhubbubUser do
   let(:user) { UserFactory.build }
-  it "user with superfeedr" do
+  it "user with pubsubhubbub" do
     user.should_receive(:save).once
 
-    result = SuperfeedrUser.complete(user)
+    result = PubsubhubbubUser.complete(user)
   end
 end

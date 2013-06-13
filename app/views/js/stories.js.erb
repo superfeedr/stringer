@@ -45,7 +45,6 @@
       StoryApp.toggleCurrentStarred();
     });
 
-    <% if @has_superfeedr %>
     var source = new EventSource('/stream');
     source.addEventListener('message', function(e){
       try{
@@ -68,6 +67,5 @@
         console.log("ERROR:" + err.message);
       }
     });
-    <% end %>
   });
 </script>

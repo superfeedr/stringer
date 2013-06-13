@@ -1,25 +1,25 @@
 en:
-  superfeedr:
+  pubsubhubbub:
     add:
-      title: Superfeedr
-      description: Add Superfeedr credentials
+      title: Pubsubhubbub
+      description: Add Pubsubhubbub credentials
       fields:
         username: Username
         password: Password
         submit: Connect
       flash:
-        connected: Connected to Superfeedr
-        not_connected: Unable to connect to Superfeedr
+        connected: Connected to Pubsubhubbub
+        not_connected: Unable to connect to Pubsubhubbub
     remove:
       fields:
         username: Username
         submit: Delete
       flash:
-        disconnected: Disconnected from Superfeedr
-        not_disconnected: Unable to disconnect from Superfeedr
+        disconnected: Disconnected from Pubsubhubbub
+        not_disconnected: Unable to disconnect from Pubsubhubbub
     setup:
-      already_connected: Already connected to Superfeedr.
-      update_delete_message: You can %{update} or %{delete} Superfeedr credentials.
+      already_connected: Already connected to Pubsubhubbub.
+      update_delete_message: You can %{update} or %{delete} Pubsubhubbub credentials.
       update: update
       delete: delete
   archive:
@@ -57,7 +57,7 @@ en:
         added_successfully: We've added your new feed. Check back in a bit.
         already_subscribed_error: You are already subscribed to this feed...
         feed_not_found_error: We couldn't find that feed. Try again.
-        superfeedr_subscribe_error: We couldn't subsribe feed to superfeedr. Try again.
+        pubsubhubbub_subscribe_error: We couldn't subsribe feed to pubsubhubbub. Try again.
       title: Need new stories?
     index:
       add: add
@@ -74,7 +74,7 @@ en:
         passwords_dont_match: Hey, your password confirmation didn't match. Try again.
       subtitle: ! 'There is only one user: you.'
       title: Stringer is
-    superfeedr:
+    pubsubhubbub:
       flash:
         no_username_password: Hey, enter a username and a password. Try again.
   flash:
@@ -95,7 +95,7 @@ en:
     logout: Logout
     support: Support
     title: stringer | your rss buddy
-    superfeedr: Superfeedr
+    pubsubhubbub: Pubsubhubbub
   partials:
     action_bar:
       add_feed: Add a feed
@@ -104,7 +104,7 @@ en:
       refresh: Refresh
       view_feeds: View feeds
       starred_stories: Starred stories
-      connect_to_superfeedr: Connect to Superfeedr
+      connect_to_pubsubhubbub: Connect to Pubsubhubbub
     feed:
       last_fetched:
         never: Never
