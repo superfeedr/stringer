@@ -48,14 +48,9 @@ class Stringer < Sinatra::Base
       # subscribe to pubsubhubbub
       begin
         unless settings.pubsubhubbub.nil?
-          puts "HUB--HUB--HUB"
-          puts "HUB--HUB--HUB"
-          puts "HUB--HUB--HUB"
           if hub
-            puts "subscribe with hub"
             subscription = settings.pubsubhubbub.subscribe(feed.url, nil, {:hub => hub})
           else
-            puts "subscribe with NO hub"
             subscription = settings.pubsubhubbub.subscribe(feed.url)
           end
           if !subscription
@@ -64,8 +59,6 @@ class Stringer < Sinatra::Base
           end
         end 
       rescue Exception => msg  
-        puts "ERROR"
-        puts msg
         flash.now[:error] = t('feeds.add.flash.pubsubhubbub_subscribe_error')
         erb :'feeds/add'
       end 
